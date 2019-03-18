@@ -174,3 +174,29 @@ method方法不存在或为空
 }
 
 ```
+-----
+##### 文章代码查询接口 `LG_article`
+
+###### Request
+```
+{
+    "id" : 1,
+    "jsonrpc" : "2.0",
+    "method" : "LG_article",
+    "params" : ["b"]    // a 用户协议 | b 帮助用心 | c 关于我们
+}
+```
+
+###### Response
+
+```
+{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": {
+        "name": "帮助中心",
+        "codes": "一段帮助代码"
+    }
+}
+
+```

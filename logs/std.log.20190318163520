@@ -1,0 +1,2 @@
+time="2019-03-18 16:35:20.437" level=info msg="start server at:9997"
+time="2019-03-18 16:35:24.117" level=warning msg="Error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key = ?' at line 1"

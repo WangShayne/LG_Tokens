@@ -64,3 +64,7 @@
 1. 新增域名申请接口 `LG_ensRegister`
 2. 新增域名查询公钥接口 `LG_ensSearch`
 3. 封装response,增加错误消息
+
+### 2019-3-18
+
+1. 新增文章查询接口 `LG_article`

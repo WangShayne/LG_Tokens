@@ -1,0 +1,2 @@
+time="2019-03-18 16:36:02.013" level=warning msg="sql: Scan error on column index 0, name \"id\": destination not a pointer"
+time="2019-03-18 16:36:14.726" level=warning msg="sql: Scan error on column index 0, name \"id\": destination not a pointer"
