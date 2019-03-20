@@ -79,3 +79,40 @@ func QueryENS(name string) (ens common.Ens, errCode int) {
 	errCode = 0
 	return
 }
+
+func QueryENSByKey(key string) (ensByKey common.EnsRespByKey, errCode int) {
+
+	sqlStr := "SELECT * FROM ens WHERE pubKey = ?"
+	stmt, err := DB.Prepare(sqlStr)
+	if err != nil {
+		fmt.Println(err)
+		errCode = 10001
+		return
+	}
+	defer func() {
+		if stmt != nil {
+			stmt.Close()
+		}
+	}()
+
+	result, err := stmt.Query(key)
+	if err != nil {
+		fmt.Println(err)
+		errCode = 10001
+		return
+	}
+	var ens common.Ens
+	for result.Next() {
+
+		err := result.Scan(&ens.ID, &ens.DomainName, &ens.PubKey)
+		if err != nil {
+			Logger.Log.Warn(err)
+			fmt.Println(err)
+			errCode = 10001
+		}
+		ensByKey.DomainName = append(ensByKey.DomainName, ens.DomainName)
+	}
+	ensByKey.PubKey = key
+	errCode = 0
+	return
+}

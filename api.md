@@ -200,3 +200,34 @@ method方法不存在或为空
 }
 
 ```
+-----
+##### 公钥查询域名接口 `LG_ensSearchByKey`
+
+###### Request
+```
+{
+    "id" : 1,
+    "jsonrpc" : "2.0",
+    "method" : "LG_ensSearchByKey",
+    "params" : ["0xc31dcf0d24d7ee0438de19890fb8dc6617cc3de2"]
+}
+```
+
+###### Response
+
+```
+{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": {
+        "domainName": [
+            "aaaaaaaa",
+            "qqqqqqqq",
+            "qqqqqqqqqq",
+            "wwwwwwww"
+        ],
+        "pubKey": "0xc31dcf0d24d7ee0438de19890fb8dc6617cc3de2"
+    }
+}
+
+```

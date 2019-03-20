@@ -70,9 +70,13 @@ func Apis(c *gin.Context) {
 
 		ctrl.SearchEns(&requestBody, c)
 
+	//  公钥查询域名
+	case "LG_ensSearchByKey":
+
+		ctrl.SearchEnsByKey(&requestBody, c)
+
 	//  文章代码查询
 	case "LG_article":
-		fmt.Println("okokokokokoko")
 		ctrl.GetArticles(&requestBody, c)
 
 	default:

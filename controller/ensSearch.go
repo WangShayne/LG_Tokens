@@ -23,3 +23,15 @@ func SearchEns(requestBody *common.RequestBody, c *gin.Context) {
 	c.JSON(200, util.CreateResponseBody(requestBody, errCode, ensResp))
 
 }
+
+func SearchEnsByKey(requestBody *common.RequestBody, c *gin.Context) {
+
+	p := requestBody.Params.([]interface{})
+
+	key := p[0].(string)
+
+	ensByKey, errCode := db.QueryENSByKey(key)
+
+	c.JSON(200, util.CreateResponseBody(requestBody, errCode, ensByKey))
+
+}
