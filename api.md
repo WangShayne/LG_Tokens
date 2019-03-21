@@ -220,13 +220,9 @@ method方法不存在或为空
     "id": 1,
     "jsonrpc": "2.0",
     "result": {
-        "domainName": [
-            "aaaaaaaa",
-            "qqqqqqqq",
-            "qqqqqqqqqq",
-            "wwwwwwww"
-        ],
-        "pubKey": "0xc31dcf0d24d7ee0438de19890fb8dc6617cc3de2"
+        "id": 82,
+        "domainName": "www.bai1dd.com",
+        "PubKey": "0xc31dcf0d24d7ee0438de19890fb8dc6617cc3de2"
     }
 }
 

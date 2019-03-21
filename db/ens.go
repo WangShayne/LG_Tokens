@@ -80,9 +80,9 @@ func QueryENS(name string) (ens common.Ens, errCode int) {
 	return
 }
 
-func QueryENSByKey(key string) (ensByKey common.EnsRespByKey, errCode int) {
+func QueryENSByKey(key string) (ens common.Ens, errCode int) {
 
-	sqlStr := "SELECT * FROM ens WHERE pubKey = ?"
+	sqlStr := "SELECT * FROM ens WHERE pubKey = ? ORDER BY id DESC LIMIT 1"
 	stmt, err := DB.Prepare(sqlStr)
 	if err != nil {
 		fmt.Println(err)
@@ -95,24 +95,8 @@ func QueryENSByKey(key string) (ensByKey common.EnsRespByKey, errCode int) {
 		}
 	}()
 
-	result, err := stmt.Query(key)
-	if err != nil {
-		fmt.Println(err)
-		errCode = 10001
-		return
-	}
-	var ens common.Ens
-	for result.Next() {
-
-		err := result.Scan(&ens.ID, &ens.DomainName, &ens.PubKey)
-		if err != nil {
-			Logger.Log.Warn(err)
-			fmt.Println(err)
-			errCode = 10001
-		}
-		ensByKey.DomainName = append(ensByKey.DomainName, ens.DomainName)
-	}
-	ensByKey.PubKey = key
+	result := stmt.QueryRow(key)
+	result.Scan(&ens.ID, &ens.DomainName, &ens.PubKey)
 	errCode = 0
 	return
 }
