@@ -36,6 +36,8 @@ const (
 	// 域名查询错误
 	ENS_SEARCH_ERR      = 50001
 	ENS_SEARCHBYKEY_ERR = 50002
+	// 文章查询错误
+	ARTICLE_SEARCH_ERR = 60001
 )
 
 func CreateErrorByCode(code int) (errorBody map[string]interface{}) {
@@ -74,6 +76,10 @@ func CreateErrorByCode(code int) (errorBody map[string]interface{}) {
 	case ENS_SEARCHBYKEY_ERR:
 		errorBody["code"] = 50002
 		errorBody["msg"] = "未查询到相应域名"
+
+	case ARTICLE_SEARCH_ERR:
+		errorBody["code"] = 60001
+		errorBody["msg"] = "未查询到相应文档"
 
 	default:
 

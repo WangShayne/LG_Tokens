@@ -6,8 +6,8 @@ import (
 	"github.com/LG_Tokens/common"
 )
 
-func QueryArticles(key string) (article common.Article) {
-	sqlStr := `SELECT * FROM articles WHERE keyName = ?`
+func QueryArticles(key string) (article common.Article, errCode int) {
+	sqlStr := `SELECT name,type,codes FROM articles WHERE keyName = ?`
 	stmt, err := DB.Prepare(sqlStr)
 	if err != nil {
 		Logger.Log.Warn(err)
@@ -21,20 +21,13 @@ func QueryArticles(key string) (article common.Article) {
 		}
 	}()
 
-	rows, err := stmt.Query(key)
-	if err != nil {
-		Logger.Log.Warn(err)
-		fmt.Println(err)
-		return
-	}
-	for rows.Next() {
-		var id int32
-		var keyname string
-		err := rows.Scan(&id, &article.Name, &keyname, &article.Codes)
-		if err != nil {
-			Logger.Log.Warn(err)
-			fmt.Println(err)
-		}
+	result := stmt.QueryRow(key)
+	result.Scan(&article.Name, &article.Type, &article.Codes)
+
+	if article.Name == "" {
+		errCode = 60001
+	} else {
+		errCode = 0
 	}
 	return
 }

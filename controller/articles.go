@@ -16,8 +16,8 @@ func GetArticles(requestBody *common.RequestBody, c *gin.Context) {
 		return
 	}
 
-	article := db.QueryArticles(p[0].(string))
+	article, errCode := db.QueryArticles(p[0].(string))
 
-	c.JSON(http.StatusOK, util.CreateResponseBody(requestBody, 0, article))
+	c.JSON(http.StatusOK, util.CreateResponseBody(requestBody, errCode, article))
 
 }
