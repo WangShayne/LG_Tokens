@@ -76,7 +76,13 @@ func QueryENS(name string) (ens common.Ens, errCode int) {
 			errCode = 10001
 		}
 	}
-	errCode = 0
+
+	if ens.ID == nil {
+		errCode = 50001
+	} else {
+		errCode = 0
+	}
+
 	return
 }
 
@@ -97,6 +103,10 @@ func QueryENSByKey(key string) (ens common.Ens, errCode int) {
 
 	result := stmt.QueryRow(key)
 	result.Scan(&ens.ID, &ens.DomainName, &ens.PubKey)
-	errCode = 0
+	if ens.ID == nil {
+		errCode = 50002
+	} else {
+		errCode = 0
+	}
 	return
 }

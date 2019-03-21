@@ -34,7 +34,8 @@ const (
 	ENS_REGISTER_ERR       = 40001
 	ENS_REGISTER_EXIST_ERR = 40002
 	// 域名查询错误
-	ENS_SEARCH_ERR = 50001
+	ENS_SEARCH_ERR      = 50001
+	ENS_SEARCHBYKEY_ERR = 50002
 )
 
 func CreateErrorByCode(code int) (errorBody map[string]interface{}) {
@@ -66,6 +67,13 @@ func CreateErrorByCode(code int) (errorBody map[string]interface{}) {
 	case ENS_REGISTER_EXIST_ERR:
 		errorBody["code"] = 40002
 		errorBody["msg"] = "注册失败,域名已存在"
+	case ENS_SEARCH_ERR:
+		errorBody["code"] = 50001
+		errorBody["msg"] = "未查询到相应公钥"
+
+	case ENS_SEARCHBYKEY_ERR:
+		errorBody["code"] = 50002
+		errorBody["msg"] = "未查询到相应域名"
 
 	default:
 
